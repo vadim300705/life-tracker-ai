@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Life Tracker AI',
-  description: 'Track habits, health, and performance with AI-powered insights.',
+  description: 'Приложение для отслеживания привычек, здоровья и AI-аналитики.',
 };
 
 export default function RootLayout({ children }) {
