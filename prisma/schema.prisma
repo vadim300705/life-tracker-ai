@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Metric {
+  id        String       @id @default(cuid())
+  name      String
+  unit      String?
+  category  String       @default("health")
+  type      String       @default("number")
+  createdAt DateTime     @default(now())
+  entries   MetricEntry[]
+}
+
+model MetricEntry {
+  id        String   @id @default(cuid())
+  metricId  String
+  value     Float
+  note      String?
+  createdAt DateTime @default(now())
+
+  metric    Metric    @relation(fields: [metricId], references: [id], onDelete: Cascade)
+}
+
+model Insight {
+  id        String   @id @default(cuid())
+  title     String   @default("Weekly insight")
+  summary   String
+  createdAt DateTime @default(now())
+}
